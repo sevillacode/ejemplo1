@@ -1,4 +1,4 @@
 ejemplo1
 ========
 
-mysql pdo clase manejo basico
+mysql pdo clase manejo basico eitado
