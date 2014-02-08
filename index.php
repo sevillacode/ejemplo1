@@ -10,6 +10,7 @@ $urlTemp = dirname(__FILE__).'/normal/index.tpl';
 
 
 $fichas = new Fichas();
+// comentario simple
 
 
 if($_GET['i']){
