@@ -64,6 +64,7 @@ class Fichas extends Seguridad{
 		// print_r($this);
 		// echo '</pre>';
 		$statement = $this->db->prepare($sql);
+		var_dump($statement);
 		$statement->execute($param);
 		$statement->setFetchMode(PDO::FETCH_ASSOC);
 		$array_elementos = array();
