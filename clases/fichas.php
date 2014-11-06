@@ -56,31 +56,33 @@ class Controller_Fichas extends Model_Fichas{
 		$this->manejaCrud = new CRUD;
 	}
 
-	
+
 	public function dame(){
 		$args = (!empty(func_get_args())) ? func_get_args() : null;
 		$this->obtener($args);
 	}
 
 	protected function obtener($id_ficha = null, $id_usuario = null, $id_provincia = null){
-		$sql = 'SELECT * FROM fichas WHERE del = 0';
+		$sql = 'SELECT * FROM `fichas` WHERE `del` = 0';
 		$param = array();
 		if(!is_null($id_ficha)){
 			$sql = ' AND id_ficha = :id_ficha';
-			$param[':id_ficha'] = $this->sanitizar($id_ficha);
+			$param[':id_ficha'] = $this->db->sanitizar($id_ficha);
 		}
 		if(!is_null($id_usuario)){
 			$sql .= ' AND id_usuario = :id_usuario';
-			$param[':id_usuario'] = $this->sanitizar($id_usuario);
+			$param[':id_usuario'] = $this->db->sanitizar($id_usuario);
 		}
 		if(!is_null($id_provincia)){
 			$sql .= ' AND id_provincia = :id_provincia';
-			$param[':id_provincia'] = $this->sanitizar($id_provincia);
+			$param[':id_provincia'] = $this->db->sanitizar($id_provincia);
 		}
-		// echo '<pre>';
-		// print_r($this);
-		// echo '</pre>';
-		$statement = $this->db->prepare($sql);
+		 echo '<pre>';
+		 print_r($this);
+		 echo '</pre>';
+		 echo $sql;
+		 
+		$statement = $this->db->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 		var_dump($statement);
 		$statement->execute($param);
 		$statement->setFetchMode(PDO::FETCH_ASSOC);
