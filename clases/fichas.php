@@ -1,17 +1,17 @@
 <?php
-class Fichas extends Seguridad{
+class Model_Fichas{
 	const CAMPO_IDENTIFICADOR = 'id_ficha';
 	
-	public $nombre;
-	public $id_ficha;
-	public $descripcion;
-	public $id_provincia;
-	public $id_usuario;
-	public $localizacion;
-	public $estado;
-	public $tipo;
+	protected $nombre;
+	protected $id_ficha;
+	protected $descripcion;
+	protected $id_provincia;
+	protected $id_usuario;
+	protected $localizacion;
+	protected $estado;
+	protected $tipo;
 	
-	private $db;
+	///private $db;
 	
 	
 	public static function get_id(){		return $this->id_ficha;			}
@@ -34,7 +34,7 @@ class Fichas extends Seguridad{
 	public function set_tipo($par){				$this->tipo = $par;				}
 	
 	function __construct(){ 
-		$this->db = DB::getInstance();
+	////	$this->db = DB::getInstance();
 		$this->nombre = null;
 		$this->id_ficha = null;
 		$this->descripcion = null;
@@ -44,8 +44,25 @@ class Fichas extends Seguridad{
 		$this->estado = null;
 		$this->tipo = null;
 	}
-		
-	public function obtener($id_ficha = null, $id_usuario = null, $id_provincia = null){
+}		
+
+class Controller_Fichas extends Model_Fichas{
+
+	private $db;
+	private $manejacrud;
+
+	function __construct(){ 
+		$this->db = DB::getInstance();
+		$this->manejaCrud = new CRUD;
+	}
+
+	
+	public function dame(){
+		$args = (!empty(func_get_args())) ? func_get_args() : null;
+		$this->obtener($args);
+	}
+
+	protected function obtener($id_ficha = null, $id_usuario = null, $id_provincia = null){
 		$sql = 'SELECT * FROM fichas WHERE del = 0';
 		$param = array();
 		if(!is_null($id_ficha)){

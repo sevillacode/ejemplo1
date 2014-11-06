@@ -9,7 +9,7 @@ $urlTemp = dirname(__FILE__).'/normal/index.tpl';
 // $temp = abre($urlTemp);
 
 
-$fichas = new Fichas();
+$fichas = new Controller_Fichas();
 // comentario simple
 
 
@@ -37,7 +37,7 @@ if($_GET['m']){
 	echo '<br>El objeto cambio a '.$lfichas[0]->get_nombre();
 }
 
-$listafichas = $fichas->obtener();
+$listafichas = $fichas->dame();
 // echo '<pre>';
 // print_r($listafichas);
 // echo '</pre>';
